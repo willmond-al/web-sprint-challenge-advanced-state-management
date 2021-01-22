@@ -1,14 +1,44 @@
 import React from 'react';
+import axios from 'axios'
+import Smurf from './Smurf'
+import { connect } from 'react-redux'
+
+import { getSmurfs } from '../actions/index'
 
 export class SmurfDisplay extends React.Component {
+
+    state = {
+        smurfs: []
+      }
+    
+      componentDidMount() {
+        // axios.get('http://localhost:3333/smurfs').then(res=>{
+        //   console.log(res);
+        //   this.setState({
+        //     smurfs: res.data
+        //   })
+        // })
+        getSmurfs()
+      }
+
     render() {
         return(<div>
-            
+            {this.state.smurfs.map(smurf=>{
+               return <Smurf key={smurf.id} smurf={smurf}/>
+            })}
         </div>)
     }
 }
 
-export default SmurfDisplay;
+const mapStateToProps = state => {
+    return {
+        smurfs: state.smurfs, 
+        appIsLoading: state.appIsLoading,
+        error: state.error,
+    };
+  };
+  
+  export default connect(mapStateToProps, { getSmurfs })(SmurfDisplay);
 
 //Task List:
 //1. Import in all needed components and library methods.
