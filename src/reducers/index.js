@@ -1,12 +1,39 @@
+import { FETCH_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAIL } from '../actions/index'
 
 export const initialState = {
+    smurfs: [],
+    appIsLoading: false,
+    error: ''
 }
 
-const reducer = ()=>{
-    
-}
+export const reducer = (state = initialState, action)=>{
+    switch(action.payload){
+        case(FETCH_SMURFS_START):
+        return({
+            ...state,
+            smurfs: [],
+            appIsLoading: true,
+            error: ''
+        })
+        case(FETCH_SMURFS_SUCCESS):
+        return({
+            ...state,
+            smurfs: action.payload,
+            appIsLoading: false,
+            error: ''
+        })
+        case(FETCH_SMURFS_FAIL):
+        return ({
+            ...state,
+            smurfs: [],
+            appIsLoading: false,
+            error: action.payload
+        })
+        default:
+            return state
+        }
+    }
 
-export default reducer;
 
 //Task List:
 //1. Add in the initialState needed to hold: 
