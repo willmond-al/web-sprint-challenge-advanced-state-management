@@ -5,20 +5,20 @@ import { connect } from 'react-redux'
 
 import { getSmurfs } from '../actions/index'
 
-export class SmurfDisplay extends React.Component {
+ class SmurfDisplay extends React.Component {
 
     state = {
         smurfs: []
       }
     
       componentDidMount() {
-        // axios.get('http://localhost:3333/smurfs').then(res=>{
-        //   console.log(res);
-        //   this.setState({
-        //     smurfs: res.data
-        //   })
-        // })
-        getSmurfs()
+        axios.get('http://localhost:3333/smurfs').then(res=>{
+          console.log(res);
+          this.setState({
+            smurfs: res.data
+          })
+        })
+        // getSmurfs()
       }
 
     render() {
